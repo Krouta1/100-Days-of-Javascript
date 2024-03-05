@@ -1,21 +1,20 @@
 //Variables
-const btn = document.getElementById("btn")
-
+const btn = document.getElementById('btn');
 
 //functions
-const getUser = (e) => {
-  e.preventDefault()
+const getUser = e => {
+  e.preventDefault();
 
-  const http = new XMLHttpRequest()
+  const http = new XMLHttpRequest();
 
-  http.open("GET","users.json",true)
-  http.onload = function (){
-    if(!this.status === 200) return
+  http.open('GET', 'users.json', true);
+  http.onload = function () {
+    if (!this.status === 200) return;
     // console.log(this.responseText)
 
-    const users = JSON.parse(this.responseText)
-    users.map((user)=>{
-      document.getElementById("users").innerHTML += `
+    const users = JSON.parse(this.responseText);
+    users.map(user => {
+      document.getElementById('users').innerHTML += `
       <hr>
       <ul>
         <li>ID: ${user.id}</li>
@@ -23,12 +22,11 @@ const getUser = (e) => {
         <li>Age: ${user.age}</li>
         <li>Email: ${user.email}</li>
       </ul>
-      `
-    })
-  }
-  http.send()
-}
-
+      `;
+    });
+  };
+  http.send();
+};
 
 //event listeners
-btn.addEventListener("click", getUser)
+btn.addEventListener('click', getUser);

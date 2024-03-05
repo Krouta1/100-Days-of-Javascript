@@ -1,10 +1,10 @@
 // Variables
-const btn = document.getElementById("btn");
-const usersContainer = document.getElementById("users");
+const btn = document.getElementById('btn');
+const usersContainer = document.getElementById('users');
 
 // Functions
-const renderUser = (user) => {
-    const userHTML = `
+const renderUser = user => {
+  const userHTML = `
         <hr>
         <ul>
             <li>ID: ${user.id}</li>
@@ -13,20 +13,20 @@ const renderUser = (user) => {
             <li>Email: ${user.email}</li>
         </ul>
     `;
-    usersContainer.innerHTML += userHTML;
+  usersContainer.innerHTML += userHTML;
 };
 
-const displayUsers = (users) => {
-    users.forEach(renderUser);
+const displayUsers = users => {
+  users.forEach(renderUser);
 };
 
-const getUser = (e) => {
-    e.preventDefault();
+const getUser = e => {
+  e.preventDefault();
 
-    fetch("users.json")
-        .then((res) => res.json())
-        .then(displayUsers);
+  fetch('users.json')
+    .then(res => res.json())
+    .then(displayUsers);
 };
 
 // Event Listeners
-btn.addEventListener("click", getUser);
+btn.addEventListener('click', getUser);
