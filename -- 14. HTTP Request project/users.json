@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "name": "Johon Doe",
+        "age": 18,
+        "email": "john@gamil.com"
+
+    },
+    {
+        "id":2,
+        "name": "Gab Doe",
+        "age": 15,
+        "email": "gab@gamil.com"
+
+    },
+    {
+        "id":3,
+        "name": "Lucy Doe",
+        "age": 24,
+        "email": "lucy@gamil.com"
+
+    }
+]
