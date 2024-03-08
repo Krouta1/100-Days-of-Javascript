@@ -23,7 +23,7 @@ const getRandomCharFromString = (inputString) => {
 
 const generatePassword = () => {
   const options = [elements.pwdUpper, elements.pwdLower, elements.pwdNumber, elements.pwdSymbol];
-  const initialPwd = options.filter(option => option.checked).map(option => characters[option.id]).join(""); // this will initialize password
+  const initialPwd = options.filter(option => option.checked).map(option => characters[option.id]).join("");
 
   if (elements.pwdLength.value === 0) {
     alert("Please define the length of your password!");
