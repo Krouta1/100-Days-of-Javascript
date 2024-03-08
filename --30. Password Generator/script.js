@@ -1,4 +1,3 @@
-//VARIABLES AND ELEMENTS
 const characters = {
   empty: "",
   case: "abcdefghijklmnopqrstuvwxyz",
@@ -17,28 +16,21 @@ const elements = {
   copy: document.getElementById("copy"),
 };
 
-//FUNCTIONS
 const getRandomCharFromString = (inputString) => {
   const randomIndex = Math.floor(Math.random() * inputString.length);
   return inputString.charAt(randomIndex);
 };
 
 const generatePassword = () => {
-  let initialPwd = "";
-  // ADD Characters if an option is checked
-  elements.pwdUpper.checked ? (initialPwd += characters.case.toUpperCase()) : "";
-  elements.pwdLower.checked ? (initialPwd += characters.case) : "";
-  elements.pwdNumber.checked ? (initialPwd += characters.number) : "";
-  elements.pwdSymbol.checked ? (initialPwd += characters.symbol) : "";
+  const options = [elements.pwdUpper, elements.pwdLower, elements.pwdNumber, elements.pwdSymbol];
+  const initialPwd = options.filter(option => option.checked).map(option => characters[option.id]).join(""); // this will initialize password
 
-  if (elements.pwdLength.value === 0) return alert("Please define length of your password!");
-
-  let finalPwd = "";
-  for (let index = 0; index < elements.pwdLength.value; index++) {
-    finalPwd += getRandomCharFromString(initialPwd);
+  if (elements.pwdLength.value === 0) {
+    alert("Please define the length of your password!");
+    return "";
   }
 
-  return finalPwd;
+  return Array.from({ length: elements.pwdLength.value }, () => getRandomCharFromString(initialPwd)).join("");
 };
 
 const displayPwd = () => {
@@ -56,6 +48,5 @@ const copyPwd = (e) => {
     });
 };
 
-//EVENT LISTENERS
 elements.generate.addEventListener("click", displayPwd);
 elements.copy.addEventListener("click", copyPwd);
