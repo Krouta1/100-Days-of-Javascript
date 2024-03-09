@@ -2,7 +2,7 @@ const characters = {
   empty: "",
   case: "abcdefghijklmnopqrstuvwxyz",
   number: "0123456789",
-  symbol: "!@#$%^&*=-_"
+  symbol: "!@#$%^&*=-_",
 };
 
 const elements = {
@@ -22,15 +22,29 @@ const getRandomCharFromString = (inputString) => {
 };
 
 const generatePassword = () => {
-  const options = [elements.pwdUpper, elements.pwdLower, elements.pwdNumber, elements.pwdSymbol];
-  const initialPwd = options.filter(option => option.checked).map(option => characters[option.id]).join("");
-
   if (elements.pwdLength.value === 0) {
     alert("Please define the length of your password!");
     return "";
   }
 
-  return Array.from({ length: elements.pwdLength.value }, () => getRandomCharFromString(initialPwd)).join("");
+  let pwdOptions = "";
+  pwdOptions += elements.pwdUpper.checked
+    ? characters.case.toUpperCase()
+    : characters.empty;
+  pwdOptions += elements.pwdLower.checked ? characters.case : characters.empty;
+  pwdOptions += elements.pwdNumber.checked
+    ? characters.number
+    : characters.empty;
+  pwdOptions += elements.pwdSymbol.checked
+    ? characters.symbol
+    : characters.empty;
+
+  let newPassword = "";
+  for (let i = 0; i < elements.pwdLength.value; i++) {
+    newPassword += getRandomCharFromString(pwdOptions);
+  }
+
+  return newPassword;
 };
 
 const displayPwd = () => {
@@ -39,13 +53,12 @@ const displayPwd = () => {
 
 const copyPwd = (e) => {
   e.preventDefault();
-  navigator.clipboard.writeText(elements.password.value)
-    .then(() => {
-      elements.copy.textContent = 'Copied';
-      setTimeout(() => {
-        elements.copy.textContent = 'Copy';
-      }, 3000);
-    });
+  navigator.clipboard.writeText(elements.password.value).then(() => {
+    elements.copy.textContent = "Copied";
+    setTimeout(() => {
+      elements.copy.textContent = "Copy";
+    }, 3000);
+  });
 };
 
 elements.generate.addEventListener("click", displayPwd);
