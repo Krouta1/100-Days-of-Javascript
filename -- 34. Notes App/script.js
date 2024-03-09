@@ -33,14 +33,16 @@ function displayNotes() {
     notesHtml.length === 0 ? 'Please add some note' : notesHtml.join('');
 }
 
-//note del btn
-function deleteNote(index) {
-  confirm('Are you sure you want to delete this note?');
-  if (!confirm) return;
-
+function addNote() {
   const notes = getNotes();
-  notes.splice(index, 1);
+  const note = {
+    title: noteTitle.value,
+    text: noteText.value,
+  };
+  notes.push(note);
   localStorage.setItem('notes', JSON.stringify(notes));
+  noteTitle.value = '';
+  noteText.value = '';
   displayNotes();
 }
 
@@ -55,16 +57,14 @@ function editNote(index) {
   displayNotes();
 }
 
-function addNote() {
+//note del btn
+function deleteNote(index) {
+  confirm('Are you sure you want to delete this note?');
+  if (!confirm) return;
+
   const notes = getNotes();
-  const note = {
-    title: noteTitle.value,
-    text: noteText.value,
-  };
-  notes.push(note);
+  notes.splice(index, 1);
   localStorage.setItem('notes', JSON.stringify(notes));
-  noteTitle.value = '';
-  noteText.value = '';
   displayNotes();
 }
 
